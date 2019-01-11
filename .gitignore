@@ -64,3 +64,4 @@ fabric.properties
 .idea/
 sysomod.iml
 target/
+/settings.xml
