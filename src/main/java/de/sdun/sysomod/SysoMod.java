@@ -1,10 +1,11 @@
 package de.sdun.sysomod;
+
 /**
  * A Simple Mod for the System.out.println command.<br>
  * It adds the call reference at the end of the line, as with an error message.<br>
- *<br>
+ * <br>
  * Load it with <code>SysoMod.loadSysoMod()</code> in your project.<br>
- *<br>
+ * <br>
  * Created by Tobias Sdun on 31.08.2017.
  */
 public class SysoMod {
@@ -26,42 +27,42 @@ public class SysoMod {
 
             @Override
             public void print(boolean b) {
-                print(b);
+                print((Object) b);
             }
 
             @Override
             public void print(char c) {
-                print(c);
+                print((Object) c);
             }
 
             @Override
             public void print(int i) {
-                print(i);
+                print((Object) i);
             }
 
             @Override
             public void print(long l) {
-                print(l);
+                print((Object) l);
             }
 
             @Override
             public void print(float v) {
-                print(v);
+                print((Object) v);
             }
 
             @Override
             public void print(double v) {
-                print(v);
+                print((Object) v);
             }
 
             @Override
             public void print(char[] chars) {
-                print(chars);
+                print((Object) chars);
             }
 
             @Override
             public void print(String s) {
-                print(s);
+                print((Object) s);
             }
 
             @Override
@@ -99,7 +100,7 @@ public class SysoMod {
                 println((Object) x);
             }
 
-            private String getString(Object o){
+            private String getString(Object o) {
                 StackTraceElement e = getCallSite();
                 String fo = String.format("%-70s", o);
                 String callSite = e == null ? "??" :
