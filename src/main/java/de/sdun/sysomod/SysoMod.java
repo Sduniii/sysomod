@@ -25,6 +25,8 @@ public class SysoMod {
                 return null;
             }
 
+            private boolean isLn = false;
+
             @Override
             public void print(boolean b) {
                 print((Object) b);
@@ -100,16 +102,19 @@ public class SysoMod {
                 println((Object) x);
             }
 
-            private String getString(Object o) {
+            private Object getString(Object o) {
                 StackTraceElement e = getCallSite();
                 String fo = String.format("%-70s", o);
-                String callSite = e == null ? "??" :
-                        String.format("%s.%s(%s:%d)",
-                                e.getClassName(),
-                                e.getMethodName(),
-                                e.getFileName(),
-                                e.getLineNumber());
-                return fo + "     at " + callSite;
+                if (e != null && !e.getClassName().equalsIgnoreCase("java.io.PrintStream")) {
+                    String callSite =
+                            String.format("%s.%s(%s:%d)",
+                                    e.getClassName(),
+                                    e.getMethodName(),
+                                    e.getFileName(),
+                                    e.getLineNumber());
+                    return fo + " at " + callSite;
+                } else
+                    return o;
             }
         });
     }
