@@ -1,9 +1,18 @@
 package de.sdun.sysomod;
 /**
+ * A Simple Mod for the System.out.println command.
+ * It at the reference to the line, like by an error message.
+ *
+ * Load with SysoMod.loadSysoMod() in your project.
+ *
  * Created by Tobias Sdun on 31.08.2017.
  */
 public class SysoMod {
 
+
+    /**
+     * Loads the Mod.
+     */
     public static void loadSysoMod() {
         System.setOut(new java.io.PrintStream(System.out) {
 
