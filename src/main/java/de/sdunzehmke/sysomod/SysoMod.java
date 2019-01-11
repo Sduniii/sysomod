@@ -1,4 +1,4 @@
-package de.sdun.sysomod;
+package de.sdunzehmke.sysomod;
 
 /**
  * A Simple Mod for the System.out.println command.<br>
