@@ -25,21 +25,58 @@ public class SysoMod {
             }
 
             @Override
+            public void print(boolean b) {
+                print(b);
+            }
+
+            @Override
+            public void print(char c) {
+                print(c);
+            }
+
+            @Override
+            public void print(int i) {
+                print(i);
+            }
+
+            @Override
+            public void print(long l) {
+                print(l);
+            }
+
+            @Override
+            public void print(float v) {
+                print(v);
+            }
+
+            @Override
+            public void print(double v) {
+                print(v);
+            }
+
+            @Override
+            public void print(char[] chars) {
+                print(chars);
+            }
+
+            @Override
+            public void print(String s) {
+                print(s);
+            }
+
+            @Override
+            public void print(Object o) {
+                super.print(getString(o));
+            }
+
+            @Override
             public void println(String s) {
                 println((Object) s);
             }
 
             @Override
             public void println(Object o) {
-                StackTraceElement e = getCallSite();
-                String fo = String.format("%-70s", o);
-                String callSite = e == null ? "??" :
-                        String.format("%s.%s(%s:%d)",
-                                e.getClassName(),
-                                e.getMethodName(),
-                                e.getFileName(),
-                                e.getLineNumber());
-                super.println(fo + "at " + callSite);
+                super.println(getString(o));
             }
 
             @Override
@@ -60,6 +97,18 @@ public class SysoMod {
             @Override
             public void println(long x) {
                 println((Object) x);
+            }
+
+            private String getString(Object o){
+                StackTraceElement e = getCallSite();
+                String fo = String.format("%-70s", o);
+                String callSite = e == null ? "??" :
+                        String.format("%s.%s(%s:%d)",
+                                e.getClassName(),
+                                e.getMethodName(),
+                                e.getFileName(),
+                                e.getLineNumber());
+                return fo + "     at " + callSite;
             }
         });
     }
