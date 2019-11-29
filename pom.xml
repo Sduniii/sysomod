@@ -6,7 +6,7 @@
 
     <groupId>de.sdun-zehmke</groupId>
     <artifactId>sysomod</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>Sduni Sysomod</name>
@@ -49,6 +49,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
     </properties>
 
     <build>

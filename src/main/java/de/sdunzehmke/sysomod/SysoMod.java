@@ -11,9 +11,18 @@ package de.sdunzehmke.sysomod;
 public class SysoMod {
 
     /**
-     * Loads the Mod.
+     * Load the mod with standart left justify by 70.
      */
+
     public static void loadSysoMod() {
+        loadSysoMod(70);
+    }
+
+    /**
+     * Load the mod.
+     * @param leftJustify the number of justify
+     */
+    public static void loadSysoMod(final int leftJustify) {
         System.setOut(new java.io.PrintStream(System.out) {
 
             private StackTraceElement getCallSite() {
@@ -104,7 +113,7 @@ public class SysoMod {
 
             private Object getString(Object o) {
                 StackTraceElement e = getCallSite();
-                String fo = String.format("%-70s", o);
+                String fo = String.format("%-" + leftJustify + "s", o);
                 if (e != null && !e.getClassName().equalsIgnoreCase("java.io.PrintStream")) {
                     String callSite =
                             String.format("%s.%s(%s:%d)",
