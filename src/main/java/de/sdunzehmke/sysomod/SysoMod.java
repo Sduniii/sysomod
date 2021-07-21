@@ -1,7 +1,7 @@
 package de.sdunzehmke.sysomod;
 
 /**
- * A Simple Mod for the System.out.println command.<br>
+ * A simple mod for the System.out.println command.<br>
  * It adds the call reference at the end of the line, as with an error message.<br>
  * <br>
  * Load it with <code>SysoMod.loadSysoMod()</code> in your project.<br>
