@@ -1,8 +1,11 @@
 package de.sdunzehmke.sysomod;
 
+import java.io.PrintStream;
+
 /**
  * A simple mod for the System.out.println command.<br>
- * It adds the call reference at the end of the line, as with an error message.<br>
+ * It adds the call reference at the end of the line, as with an error
+ * message.<br>
  * <br>
  * Load it with <code>SysoMod.loadSysoMod()</code> in your project.<br>
  * <br>
@@ -10,121 +13,212 @@ package de.sdunzehmke.sysomod;
  */
 public class SysoMod {
 
-    /**
-     * Load the mod with standart left justify by 70.
-     */
+	/**
+	 * Load the mod with standart left justify by 70.
+	 */
 
-    public static void loadSysoMod() {
-        loadSysoMod(70);
-    }
+	public static void loadSysoMod() {
+		loadSysoMod(70);
+	}
 
-    /**
-     * Load the mod.
-     * @param leftJustify the number of justify
-     */
-    public static void loadSysoMod(final int leftJustify) {
-        System.setOut(new java.io.PrintStream(System.out) {
+	/**
+	 * Load the mod.
+	 * 
+	 * @param leftJustify the number of justify
+	 */
+	public static void loadSysoMod(final int leftJustify) {
+		System.setErr(new PrintStream(System.err) {
+			private StackTraceElement getCallSite() {
+				for (StackTraceElement e : Thread.currentThread().getStackTrace())
+					if (!e.getMethodName().equals("getStackTrace") && !e.getClassName().equals(getClass().getName()))
+						return e;
+				return null;
+			}
 
-            private StackTraceElement getCallSite() {
-                for (StackTraceElement e : Thread.currentThread()
-                        .getStackTrace())
-                    if (!e.getMethodName().equals("getStackTrace")
-                            && !e.getClassName().equals(getClass().getName()))
-                        return e;
-                return null;
-            }
+			private boolean isLn = false;
 
-            private boolean isLn = false;
+			@Override
+			public void print(boolean b) {
+				print((Object) b);
+			}
 
-            @Override
-            public void print(boolean b) {
-                print((Object) b);
-            }
+			@Override
+			public void print(char c) {
+				print((Object) c);
+			}
 
-            @Override
-            public void print(char c) {
-                print((Object) c);
-            }
+			@Override
+			public void print(int i) {
+				print((Object) i);
+			}
 
-            @Override
-            public void print(int i) {
-                print((Object) i);
-            }
+			@Override
+			public void print(long l) {
+				print((Object) l);
+			}
 
-            @Override
-            public void print(long l) {
-                print((Object) l);
-            }
+			@Override
+			public void print(float v) {
+				print((Object) v);
+			}
 
-            @Override
-            public void print(float v) {
-                print((Object) v);
-            }
+			@Override
+			public void print(double v) {
+				print((Object) v);
+			}
 
-            @Override
-            public void print(double v) {
-                print((Object) v);
-            }
+			@Override
+			public void print(char[] chars) {
+				print((Object) chars);
+			}
 
-            @Override
-            public void print(char[] chars) {
-                print((Object) chars);
-            }
+			@Override
+			public void print(String s) {
+				print((Object) s);
+			}
 
-            @Override
-            public void print(String s) {
-                print((Object) s);
-            }
+			@Override
+			public void print(Object o) {
+				super.print(getString(o));
+			}
 
-            @Override
-            public void print(Object o) {
-                super.print(getString(o));
-            }
+			@Override
+			public void println(String s) {
+				println((Object) s);
+			}
 
-            @Override
-            public void println(String s) {
-                println((Object) s);
-            }
+			@Override
+			public void println(Object o) {
+				super.println(getString(o));
+			}
 
-            @Override
-            public void println(Object o) {
-                super.println(getString(o));
-            }
+			@Override
+			public void println(double x) {
+				println((Object) x);
+			}
 
-            @Override
-            public void println(double x) {
-                println((Object) x);
-            }
+			@Override
+			public void println(int x) {
+				println((Object) x);
+			}
 
-            @Override
-            public void println(int x) {
-                println((Object) x);
-            }
+			@Override
+			public void println(float x) {
+				println((Object) x);
+			}
 
-            @Override
-            public void println(float x) {
-                println((Object) x);
-            }
+			@Override
+			public void println(long x) {
+				println((Object) x);
+			}
 
-            @Override
-            public void println(long x) {
-                println((Object) x);
-            }
+			private Object getString(Object o) {
+				StackTraceElement e = getCallSite();
+				String fo = String.format("%-" + leftJustify + "s", o);
+				if (e != null && !e.getClassName().equalsIgnoreCase("java.io.PrintStream")) {
+					String callSite = String.format("%s.%s(%s:%d)", e.getClassName(), e.getMethodName(),
+							e.getFileName(), e.getLineNumber());
+					return fo + " at " + callSite;
+				} else
+					return o;
+			}
+		});
+		System.setOut(new java.io.PrintStream(System.out) {
 
-            private Object getString(Object o) {
-                StackTraceElement e = getCallSite();
-                String fo = String.format("%-" + leftJustify + "s", o);
-                if (e != null && !e.getClassName().equalsIgnoreCase("java.io.PrintStream")) {
-                    String callSite =
-                            String.format("%s.%s(%s:%d)",
-                                    e.getClassName(),
-                                    e.getMethodName(),
-                                    e.getFileName(),
-                                    e.getLineNumber());
-                    return fo + " at " + callSite;
-                } else
-                    return o;
-            }
-        });
-    }
+			private StackTraceElement getCallSite() {
+				for (StackTraceElement e : Thread.currentThread().getStackTrace())
+					if (!e.getMethodName().equals("getStackTrace") && !e.getClassName().equals(getClass().getName()))
+						return e;
+				return null;
+			}
+
+			private boolean isLn = false;
+
+			@Override
+			public void print(boolean b) {
+				print((Object) b);
+			}
+
+			@Override
+			public void print(char c) {
+				print((Object) c);
+			}
+
+			@Override
+			public void print(int i) {
+				print((Object) i);
+			}
+
+			@Override
+			public void print(long l) {
+				print((Object) l);
+			}
+
+			@Override
+			public void print(float v) {
+				print((Object) v);
+			}
+
+			@Override
+			public void print(double v) {
+				print((Object) v);
+			}
+
+			@Override
+			public void print(char[] chars) {
+				print((Object) chars);
+			}
+
+			@Override
+			public void print(String s) {
+				print((Object) s);
+			}
+
+			@Override
+			public void print(Object o) {
+				super.print(getString(o));
+			}
+
+			@Override
+			public void println(String s) {
+				println((Object) s);
+			}
+
+			@Override
+			public void println(Object o) {
+				super.println(getString(o));
+			}
+
+			@Override
+			public void println(double x) {
+				println((Object) x);
+			}
+
+			@Override
+			public void println(int x) {
+				println((Object) x);
+			}
+
+			@Override
+			public void println(float x) {
+				println((Object) x);
+			}
+
+			@Override
+			public void println(long x) {
+				println((Object) x);
+			}
+
+			private Object getString(Object o) {
+				StackTraceElement e = getCallSite();
+				String fo = String.format("%-" + leftJustify + "s", o);
+				if (e != null && !e.getClassName().equalsIgnoreCase("java.io.PrintStream")) {
+					String callSite = String.format("%s.%s(%s:%d)", e.getClassName(), e.getMethodName(),
+							e.getFileName(), e.getLineNumber());
+					return fo + " at " + callSite;
+				} else
+					return o;
+			}
+		});
+	}
 }

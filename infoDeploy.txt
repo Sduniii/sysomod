@@ -1,6 +1,9 @@
-in settings.xml:
+settings.xml in userfolder\.m2:
 
 gpg install + "gpg --gen-key"
+
+gpg --list-signatures --keyid-format 0xshort
+->ersetze xxx in der pom.xml mit der key ID
 
 <settings>
   <servers>
